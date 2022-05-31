@@ -1,0 +1,38 @@
+editor-server:
+  extensions:
+    - Pivotal.vscode-spring-boot # 名称
+    - vscjava.vscode-maven@0.34.0 # 带版本
+    - https://example.com/abc/releases/extension-0.26.0.vsix # vsix 文件
+  # The commands in the lifecycle will be run in the editorserver
+  lifecycle:
+    # The init phase will be run when the container is first started
+    init: 
+      - name: update apt cache
+        command: apt update
+      - name: install nginx
+        command: apt install -y nginx
+    # The start phase will be run after each startup of the container
+    start: 
+      - name: run nginx
+        command: service nginx start
+    # The destroy phase will run before the container is shut down
+    destory:
+      - name: stop nginx
+        command: service nginx stop
+      
+
+# The following configuration runs as a sidecar and does not support persistence.
+# The configuration below is the basic component supported by the workspace and does not support user customization.
+# If users need to install components by themselves, they can be installed through the lifecycle command in the 'editorServer' group.
+sidecar:
+  mysql:
+    enabled: false
+    password: 'root'
+    initializeDDL: ''
+
+  redis:
+    enabled: false
+    password: ''  
+
+deploy:
+
