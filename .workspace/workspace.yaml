@@ -2,7 +2,6 @@ editor-server:
   extensions:
     - Pivotal.vscode-spring-boot # 名称
     - vscjava.vscode-maven@0.34.0 # 带版本
-    - https://example.com/abc/releases/extension-0.26.0.vsix # vsix 文件
   # The commands in the lifecycle will be run in the editorserver
   lifecycle:
     # The init phase will be run when the container is first started
